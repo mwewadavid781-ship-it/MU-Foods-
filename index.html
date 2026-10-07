@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0A2F3E">
+  <meta name="description" content="JAY'S FOOD HUB: crispy fries, sizzling sausages and creamy coleslaw. Order by WhatsApp.">
+  <title>JAY'S FOOD HUB | Fresh Fries & Sausages</title>
+  <link rel="preload" as="image" href="assets/image-1.webp">
+  <style>
+    :root {
+      --deep:#0A2F3E; --teal:#12495C; --orange:#E8472A; --orange-hi:#FF5B35;
+      --butter:#F5E7A3; --cream:#FFF6D6; --white:#fff; --ink:#13232b;
+      --muted:#5f6f76; --shadow:0 14px 35px rgba(10,47,62,.12);
+      --radius:22px; --max:1120px;
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      margin:0; font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--ink); background:var(--cream); line-height:1.55;
+      padding-bottom:78px;
+    }
+    img { display:block; max-width:100%; }
+    a { color:inherit; }
+    button,input { font:inherit; }
+    button { cursor:pointer; }
+    :focus-visible { outline:3px solid var(--butter); outline-offset:3px; }
+    .skip-link {
+      position:fixed; left:12px; top:-60px; z-index:1000; background:var(--white);
+      color:var(--deep); padding:10px 14px; border-radius:10px; font-weight:800;
+    }
+    .skip-link:focus { top:12px; }
+    .nav {
+      position:sticky; top:0; z-index:100; background:rgba(10,47,62,.97);
+      border-bottom:3px solid var(--orange); backdrop-filter:blur(12px);
+    }
+    .navin {
+      width:min(var(--max),calc(100% - 28px)); min-height:66px; margin:auto;
+      display:flex; align-items:center; justify-content:space-between; gap:18px;
+    }
+    .brand { color:var(--white); font-weight:950; letter-spacing:.04em; display:flex; align-items:center; gap:8px; }
+    .brand i {
+      width:36px; height:36px; display:grid; place-items:center; border-radius:50%;
+      background:var(--orange); color:var(--white); font-style:normal; box-shadow:0 5px 14px rgba(232,71,42,.35);
+    }
+    .brand span { color:var(--butter); }
+    .navlinks { display:flex; align-items:center; gap:8px; }
+    .navlinks a { text-decoration:none; color:var(--white); font-weight:800; padding:9px 12px; border-radius:10px; }
+    .navlinks a:hover { background:rgba(255,255,255,.1); }
+    .navlinks .order { background:var(--orange); }
+    .hero {
+      background:linear-gradient(135deg,var(--deep),var(--teal)); color:var(--white);
+      padding:58px 14px 64px; overflow:hidden;
+    }
+    .hero-inner { width:min(var(--max),100%); margin:auto; display:grid; grid-template-columns:140px 1fr; align-items:center; gap:28px; }
+    .logo-badge { width:140px; aspect-ratio:1; object-fit:cover; border-radius:50%; border:6px solid var(--butter); box-shadow:0 18px 45px rgba(0,0,0,.22); }
+    .eyebrow { color:var(--butter); text-transform:uppercase; letter-spacing:.14em; font-size:.78rem; font-weight:900; margin:0 0 8px; }
+    h1 { margin:0; color:var(--orange-hi); font-size:clamp(2.2rem,7vw,4.6rem); line-height:1.02; letter-spacing:-.04em; }
+    .hero p { max-width:680px; margin:18px 0 24px; font-size:1.05rem; color:#fff9df; }
+    .actions { display:flex; flex-wrap:wrap; gap:10px; }
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; min-height:46px;
+      padding:11px 18px; border-radius:12px; text-decoration:none; font-weight:900;
+      border:2px solid transparent; transition:transform .15s ease,filter .15s ease;
+    }
+    .btn:hover,.add-btn:hover { transform:translateY(-2px); filter:brightness(1.04); }
+    .gold { background:var(--butter); color:var(--deep); }
+    .darkbtn { background:var(--orange); color:var(--white); }
+    main { width:min(var(--max),calc(100% - 28px)); margin:auto; }
+    .section { padding:54px 0; }
+    .section-head { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:end; gap:18px; margin-bottom:22px; }
+    h2 { color:var(--deep); font-size:clamp(1.7rem,4vw,2.5rem); margin:0; letter-spacing:-.025em; }
+    .search-wrap { position:relative; min-width:min(100%,320px); }
+    .search {
+      width:100%; min-height:46px; border:2px solid #e4d9ad; border-radius:14px;
+      padding:10px 14px 10px 42px; background:var(--white); color:var(--ink);
+    }
+    .search-icon { position:absolute; left:14px; top:50%; transform:translateY(-50%); pointer-events:none; }
+    .results-note { min-height:24px; margin:8px 0 0; color:var(--muted); font-weight:700; }
+    .menu-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; }
+    .card {
+      background:var(--white); border:1px solid rgba(18,73,92,.12); border-radius:var(--radius);
+      overflow:hidden; box-shadow:var(--shadow); display:flex; flex-direction:column;
+      transition:transform .18s ease,box-shadow .18s ease;
+    }
+    .card:hover { transform:translateY(-4px); box-shadow:0 20px 42px rgba(10,47,62,.16); }
+    .pic { aspect-ratio:4/3; background:#f4eac3; overflow:hidden; }
+    .pic img { width:100%; height:100%; object-fit:cover; }
+    .card-body { padding:18px; display:flex; flex:1; flex-direction:column; }
+    .card-title-row { display:flex; align-items:start; justify-content:space-between; gap:12px; }
+    h3 { margin:0; color:var(--deep); font-size:1.05rem; line-height:1.25; }
+    .card strong { color:var(--orange); white-space:nowrap; font-size:1.1rem; }
+    .card p { color:var(--muted); margin:10px 0 16px; }
+    .add-btn {
+      margin-top:auto; width:100%; border:0; border-radius:12px; min-height:46px;
+      background:var(--orange); color:var(--white); font-weight:900;
+      transition:transform .15s ease,filter .15s ease;
+    }
+    .empty { display:none; padding:30px; text-align:center; background:var(--white); border-radius:18px; color:var(--muted); font-weight:800; }
+    .perks { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .perk { background:var(--white); border:1px solid rgba(18,73,92,.1); border-radius:18px; padding:20px; box-shadow:var(--shadow); }
+    .perk b { color:var(--deep); display:block; margin-bottom:5px; }
+    .cta {
+      margin:8px 0 54px; padding:34px; border-radius:var(--radius);
+      background:linear-gradient(135deg,var(--deep),var(--teal)); color:var(--white);
+      border:3px solid var(--orange); display:flex; justify-content:space-between; align-items:center; gap:20px;
+    }
+    .cta h2 { color:var(--white); }
+    .cta p { margin:8px 0 0; color:#fff9df; }
+    footer { background:var(--deep); color:#dcecf1; text-align:center; padding:26px 14px; }
+    .bottom {
+      position:fixed; left:0; right:0; bottom:0; z-index:90; background:var(--deep);
+      border-top:2px solid var(--orange); display:grid; grid-template-columns:1fr 1fr 1fr;
+      padding:8px max(10px,env(safe-area-inset-left)) max(8px,env(safe-area-inset-bottom));
+    }
+    .bottom a,.bottom button {
+      min-height:48px; background:none; border:0; color:var(--white); text-decoration:none;
+      font-weight:850; display:grid; place-items:center; gap:1px;
+    }
+    .bottom .cart { color:var(--butter); }
+    .toast {
+      position:fixed; left:50%; bottom:92px; transform:translate(-50%,20px); opacity:0;
+      pointer-events:none; background:var(--deep); color:var(--white); border:2px solid var(--orange);
+      padding:11px 16px; border-radius:999px; font-weight:850; z-index:120;
+      transition:opacity .2s ease,transform .2s ease;
+    }
+    .toast.show { opacity:1; transform:translate(-50%,0); }
+    .cart-count { display:inline-grid; place-items:center; min-width:22px; height:22px; padding:0 6px; border-radius:999px; background:var(--orange); color:#fff; font-size:.78rem; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+    .checkout-overlay {
+      position:fixed; inset:0; z-index:200; display:none; align-items:center; justify-content:center;
+      padding:18px; background:rgba(10,47,62,.72); backdrop-filter:blur(5px);
+    }
+    .checkout-overlay.open { display:flex; }
+    .checkout {
+      width:min(100%,520px); max-height:min(90vh,720px); overflow:auto;
+      background:var(--white); border-radius:24px; box-shadow:0 25px 70px rgba(0,0,0,.3);
+      padding:24px;
+    }
+    .checkout-head { display:flex; justify-content:space-between; align-items:start; gap:14px; margin-bottom:18px; }
+    .checkout h2 { margin:0; color:var(--deep); }
+    .close-checkout {
+      border:0; background:#edf2f3; color:var(--deep); width:40px; height:40px;
+      border-radius:50%; font-size:1.35rem; font-weight:900;
+    }
+    .checkout-summary {
+      background:#fff9df; border:1px solid #eadfba; border-radius:16px; padding:14px;
+      margin-bottom:18px; color:var(--deep);
+    }
+    .checkout-summary ul { margin:8px 0; padding-left:20px; }
+    .checkout-total { font-weight:950; color:var(--orange); font-size:1.15rem; }
+    .field { margin-bottom:15px; }
+    .field label { display:block; color:var(--deep); font-weight:900; margin-bottom:7px; }
+    .field input {
+      width:100%; min-height:48px; border:2px solid #d9e1e4; border-radius:13px;
+      padding:11px 13px; color:var(--ink); background:var(--white);
+    }
+    .field input:focus { border-color:var(--orange); outline:3px solid rgba(232,71,42,.15); }
+    .field small { display:block; margin-top:6px; color:var(--muted); }
+    .checkout-submit {
+      width:100%; min-height:50px; border:0; border-radius:13px; background:var(--orange);
+      color:var(--white); font-weight:950; font-size:1rem;
+    }
+    .checkout-submit:disabled { opacity:.55; cursor:not-allowed; }
+
+    @media (max-width:850px) {
+      .menu-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .perks { grid-template-columns:1fr; }
+      .hero-inner { grid-template-columns:1fr; text-align:center; justify-items:center; }
+      .hero p { margin-left:auto; margin-right:auto; }
+      .actions { justify-content:center; }
+    }
+    @media (max-width:560px) {
+      .navlinks a:not(.order) { display:none; }
+      .menu-grid { grid-template-columns:1fr; }
+      .hero { padding-top:42px; }
+      .logo-badge { width:112px; }
+      .cta { padding:24px; flex-direction:column; align-items:flex-start; }
+      .section { padding:40px 0; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      html { scroll-behavior:auto; }
+      *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="nav" aria-label="Primary navigation">
+    <div class="navin">
+      <a class="brand" href="#" aria-label="JAY'S FOOD HUB home"><i aria-hidden="true">J</i><span>JAY'S</span> FOOD HUB</a>
+      <div class="navlinks">
+        <a href="#menu">Menu</a>
+        <a href="#about">About</a>
+        <a class="order" href="#menu">Order</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <img class="logo-badge" src="assets/image-1.webp" width="140" height="140" alt="Jay's Food Hub logo">
+      <div>
+        <p class="eyebrow">Fresh • Crispy • Filling</p>
+        <h1>JAY'S FOOD HUB</h1>
+        <p>Pull up a seat. Golden crispy fries, sizzling sausages and creamy coleslaw are waiting for you. Pick your favourite, add it to your order, and we'll take care of the rest.</p>
+        <div class="actions">
+          <a class="btn gold" href="#menu">🍟 See what's cooking</a>
+          <a class="btn darkbtn" href="#menu">🛒 Build your order</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section" id="menu" aria-labelledby="menu-title">
+      <div class="section-head">
+        <div>
+          <h2 id="menu-title">Choose your favourite</h2>
+          <p class="results-note" id="results-note" aria-live="polite">5 items available</p>
+        </div>
+        <div class="search-wrap">
+          <span class="search-icon" aria-hidden="true">🔎</span>
+          <label class="sr-only" for="menu-search">Search menu</label>
+          <input class="search" id="menu-search" type="search" placeholder="Search menu" autocomplete="off" enterkeyhint="search">
+        </div>
+      </div>
+      <div class="menu-grid" id="menu-grid">
+        
+      <article class="card" data-name="plain fries + coleslaw">
+        <div class="pic">
+          <img src="assets/image-2.webp" alt="Plain Fries + Coleslaw" loading="lazy" decoding="async">
+        </div>
+        <div class="card-body">
+          <div class="card-title-row">
+            <h3>Plain Fries + Coleslaw</h3>
+            <strong>K40</strong>
+          </div>
+          <p>Crispy, tasty and freshly served with JAY'S signature style.</p>
+          <button class="add-btn" type="button" data-index="0" aria-label="Add Plain Fries + Coleslaw to order">
+            <span aria-hidden="true">＋</span> Add to order
+          </button>
+        </div>
+      </article>
+      <article class="card" data-name="fries + sausage + coleslaw">
+        <div class="pic">
+          <img src="assets/image-3.webp" alt="Fries + Sausage + Coleslaw" loading="lazy" decoding="async">
+        </div>
+        <div class="card-body">
+          <div class="card-title-row">
+            <h3>Fries + Sausage + Coleslaw</h3>
+            <strong>K50</strong>
+          </div>
+          <p>Crispy, tasty and freshly served with JAY'S signature style.</p>
+          <button class="add-btn" type="button" data-index="1" aria-label="Add Fries + Sausage + Coleslaw to order">
+            <span aria-hidden="true">＋</span> Add to order
+          </button>
+        </div>
+      </article>
+      <article class="card" data-name="loaded fries + 1 sausage">
+        <div class="pic">
+          <img src="assets/image-4.webp" alt="Loaded Fries + 1 Sausage" loading="lazy" decoding="async">
+        </div>
+        <div class="card-body">
+          <div class="card-title-row">
+            <h3>Loaded Fries + 1 Sausage</h3>
+            <strong>K65</strong>
+          </div>
+          <p>Crispy, tasty and freshly served with JAY'S signature style.</p>
+          <button class="add-btn" type="button" data-index="2" aria-label="Add Loaded Fries + 1 Sausage to order">
+            <span aria-hidden="true">＋</span> Add to order
+          </button>
+        </div>
+      </article>
+      <article class="card" data-name="loaded fries + 2 sausages">
+        <div class="pic">
+          <img src="assets/image-5.webp" alt="Loaded Fries + 2 Sausages" loading="lazy" decoding="async">
+        </div>
+        <div class="card-body">
+          <div class="card-title-row">
+            <h3>Loaded Fries + 2 Sausages</h3>
+            <strong>K75</strong>
+          </div>
+          <p>Crispy, tasty and freshly served with JAY'S signature style.</p>
+          <button class="add-btn" type="button" data-index="3" aria-label="Add Loaded Fries + 2 Sausages to order">
+            <span aria-hidden="true">＋</span> Add to order
+          </button>
+        </div>
+      </article>
+      <article class="card" data-name="loaded fries + 2 sausages + coleslaw">
+        <div class="pic">
+          <img src="assets/image-6.webp" alt="Loaded Fries + 2 Sausages + Coleslaw" loading="lazy" decoding="async">
+        </div>
+        <div class="card-body">
+          <div class="card-title-row">
+            <h3>Loaded Fries + 2 Sausages + Coleslaw</h3>
+            <strong>K85</strong>
+          </div>
+          <p>Crispy, tasty and freshly served with JAY'S signature style.</p>
+          <button class="add-btn" type="button" data-index="4" aria-label="Add Loaded Fries + 2 Sausages + Coleslaw to order">
+            <span aria-hidden="true">＋</span> Add to order
+          </button>
+        </div>
+      </article>
+      </div>
+      <div class="empty" id="empty-state">No menu items match that search. Try “fries” or “sausage”.</div>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="section-head"><h2 id="about-title">Good food. Good mood.</h2></div>
+      <div class="perks">
+        <div class="perk"><b>🔥 Served hot</b><span>Served hot and crispy for maximum flavour.</span></div>
+        <div class="perk"><b>🍟 Generous portions</b><span>Generous portions and tasty combinations.</span></div>
+        <div class="perk"><b>💛 Easy on the wallet</b><span>Great food without a heavy price tag.</span></div>
+      </div>
+    </section>
+
+    <section class="cta" aria-labelledby="cta-title">
+      <div>
+        <h2 id="cta-title">Get your fries loaded.</h2>
+        <p>Call or WhatsApp <strong>0764670388</strong> • Open 09:00–22:40</p>
+      </div>
+      <a class="btn gold" href="#menu">ORDER NOW</a>
+    </section>
+  </main>
+
+  <footer>
+    <strong>JAY'S FOOD HUB</strong><br>
+    Fresh food. Simple ordering.
+  </footer>
+
+
+  <div class="checkout-overlay" id="checkout-overlay" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
+    <div class="checkout">
+      <div class="checkout-head">
+        <div>
+          <h2 id="checkout-title">Where should we deliver? 📍</h2>
+          <p style="margin:6px 0 0;color:var(--muted)">Add your hostel room number or exact delivery point.</p>
+        </div>
+        <button class="close-checkout" id="close-checkout" type="button" aria-label="Close checkout">×</button>
+      </div>
+
+      <div class="checkout-summary" id="checkout-summary"></div>
+
+      <form id="checkout-form">
+        <div class="field">
+          <label for="delivery-location">Delivery location <span aria-hidden="true">*</span></label>
+          <input id="delivery-location" name="delivery-location" type="text"
+                 placeholder="e.g. Hostel B, Room 14" autocomplete="street-address" required>
+          <small>For a hostel, include the hostel name/block and room number. Otherwise enter a clear landmark or delivery point.</small>
+        </div>
+
+        <div class="field">
+          <label for="customer-name">Your name <span aria-hidden="true">*</span></label>
+          <input id="customer-name" name="customer-name" type="text"
+                 placeholder="e.g. John" autocomplete="name" required>
+        </div>
+
+        <button class="checkout-submit" type="submit">Continue to WhatsApp →</button>
+      </form>
+    </div>
+  </div>
+
+  <nav class="bottom" aria-label="Quick actions">
+    <a href="#menu"><span aria-hidden="true">🍟</span><span>Menu</span></a>
+    <button class="cart" id="cart-button" type="button" aria-label="Review order, 0 items">
+      <span aria-hidden="true">🛒</span><span>Order <span class="cart-count" id="count">0</span></span>
+    </button>
+    <a href="#menu"><span aria-hidden="true">➕</span><span>Add</span></a>
+  </nav>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const MENU = [["Plain Fries + Coleslaw", "K40"], ["Fries + Sausage + Coleslaw", "K50"], ["Loaded Fries + 1 Sausage", "K65"], ["Loaded Fries + 2 Sausages", "K75"], ["Loaded Fries + 2 Sausages + Coleslaw", "K85"]];
+      const WHATSAPP = "260764670388";
+      const cart = [];
+
+      const count = document.getElementById("count");
+      const cartButton = document.getElementById("cart-button");
+      const toast = document.getElementById("toast");
+      const search = document.getElementById("menu-search");
+      const cards = [...document.querySelectorAll(".card")];
+      const emptyState = document.getElementById("empty-state");
+      const resultsNote = document.getElementById("results-note");
+
+      function updateCartUI() {
+        count.textContent = cart.length;
+        cartButton.setAttribute("aria-label", `Review order, ${cart.length} item${cart.length === 1 ? "" : "s"}`);
+      }
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add("show");
+        window.clearTimeout(showToast.timer);
+        showToast.timer = window.setTimeout(() => toast.classList.remove("show"), 1400);
+      }
+
+      function addToCart(index) {
+        cart.push(index);
+        updateCartUI();
+        showToast(`${MENU[index][0]} added ✓`);
+      }
+
+      const checkoutOverlay = document.getElementById("checkout-overlay");
+      const checkoutSummary = document.getElementById("checkout-summary");
+      const checkoutForm = document.getElementById("checkout-form");
+      const deliveryLocation = document.getElementById("delivery-location");
+      const customerName = document.getElementById("customer-name");
+
+      function getOrderDetails() {
+        const quantities = new Map();
+        cart.forEach(index => quantities.set(index, (quantities.get(index) || 0) + 1));
+
+        let total = 0;
+        const lines = [];
+        const summaryLines = [];
+
+        quantities.forEach((qty, index) => {
+          const price = Number(MENU[index][1].slice(1));
+          total += price * qty;
+          lines.push(`- ${MENU[index][0]} x${qty}`);
+          summaryLines.push(`<li>${MENU[index][0]} ×${qty}</li>`);
+        });
+
+        return { quantities, total, lines, summaryLines };
+      }
+
+      function openOrder() {
+        if (!cart.length) {
+          showToast("Your order is empty. Choose something from the menu first.");
+          document.getElementById("menu").scrollIntoView({ behavior:"smooth", block:"start" });
+          return;
+        }
+
+        const { total, summaryLines } = getOrderDetails();
+        checkoutSummary.innerHTML =
+          `<strong>Your order</strong><ul>${summaryLines.join("")}</ul><div class="checkout-total">Total: K${total}</div>`;
+
+        checkoutOverlay.classList.add("open");
+        document.body.style.overflow = "hidden";
+        setTimeout(() => deliveryLocation.focus(), 50);
+      }
+
+      function closeOrder() {
+        checkoutOverlay.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      checkoutForm.addEventListener("submit", event => {
+        event.preventDefault();
+
+        const location = deliveryLocation.value.trim();
+        const name = customerName.value.trim();
+
+        if (!location || !name) {
+          checkoutForm.reportValidity();
+          return;
+        }
+
+        const { total, lines } = getOrderDetails();
+        const message = [
+          "Hello JAY'S FOOD HUB! I want to order:",
+          ...lines,
+          "",
+          `Total: K${total}`,
+          `Customer: ${name}`,
+          `Delivery location: ${location}`
+        ].join("\\n");
+
+        const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
+        window.open(url, "_blank", "noopener,noreferrer");
+        closeOrder();
+      });
+
+      document.getElementById("close-checkout").addEventListener("click", closeOrder);
+
+      checkoutOverlay.addEventListener("click", event => {
+        if (event.target === checkoutOverlay) closeOrder();
+      });
+
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && checkoutOverlay.classList.contains("open")) closeOrder();
+      });
+
+      function filterMenu(query) {
+        const q = query.trim().toLowerCase();
+        let visible = 0;
+
+        cards.forEach(card => {
+          const match = card.dataset.name.includes(q);
+          card.hidden = !match;
+          if (match) visible++;
+        });
+
+        emptyState.style.display = visible ? "none" : "block";
+        resultsNote.textContent = q
+          ? `${visible} item${visible === 1 ? "" : "s"} found`
+          : `${cards.length} items available`;
+      }
+
+      document.querySelectorAll(".add-btn").forEach(button => {
+        button.addEventListener("click", () => addToCart(Number(button.dataset.index)));
+      });
+
+      cartButton.addEventListener("click", openOrder);
+      search.addEventListener("input", event => filterMenu(event.target.value));
+
+      // Make all prominent "order" calls lead into the same cart flow.
+      document.querySelectorAll('a[href="#menu"]').forEach(link => {
+        link.addEventListener("click", () => {
+          if (link.textContent.includes("Order") || link.textContent.includes("ORDER")) {
+            search.focus({ preventScroll:true });
+          }
+        });
+      });
+
+      updateCartUI();
+    })();
+  </script>
+</body>
+</html>

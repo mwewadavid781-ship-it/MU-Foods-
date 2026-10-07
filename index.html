@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#0A2F3E">
   <meta name="description" content="JAY'S FOOD HUB: crispy fries, sizzling sausages and creamy coleslaw. Order by WhatsApp.">
   <title>JAY'S FOOD HUB | Fresh Fries & Sausages</title>
-  <link rel="preload" as="image" href="image-1.webp">
+  <link rel="preload" as="image" href="assets/image-1.webp">
   <style>
     :root {
       --deep:#0A2F3E; --teal:#12495C; --orange:#E8472A; --orange-hi:#FF5B35;
@@ -128,6 +128,43 @@
     .toast.show { opacity:1; transform:translate(-50%,0); }
     .cart-count { display:inline-grid; place-items:center; min-width:22px; height:22px; padding:0 6px; border-radius:999px; background:var(--orange); color:#fff; font-size:.78rem; }
     .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+    .checkout-overlay {
+      position:fixed; inset:0; z-index:200; display:none; align-items:center; justify-content:center;
+      padding:18px; background:rgba(10,47,62,.72); backdrop-filter:blur(5px);
+    }
+    .checkout-overlay.open { display:flex; }
+    .checkout {
+      width:min(100%,520px); max-height:min(90vh,720px); overflow:auto;
+      background:var(--white); border-radius:24px; box-shadow:0 25px 70px rgba(0,0,0,.3);
+      padding:24px;
+    }
+    .checkout-head { display:flex; justify-content:space-between; align-items:start; gap:14px; margin-bottom:18px; }
+    .checkout h2 { margin:0; color:var(--deep); }
+    .close-checkout {
+      border:0; background:#edf2f3; color:var(--deep); width:40px; height:40px;
+      border-radius:50%; font-size:1.35rem; font-weight:900;
+    }
+    .checkout-summary {
+      background:#fff9df; border:1px solid #eadfba; border-radius:16px; padding:14px;
+      margin-bottom:18px; color:var(--deep);
+    }
+    .checkout-summary ul { margin:8px 0; padding-left:20px; }
+    .checkout-total { font-weight:950; color:var(--orange); font-size:1.15rem; }
+    .field { margin-bottom:15px; }
+    .field label { display:block; color:var(--deep); font-weight:900; margin-bottom:7px; }
+    .field input {
+      width:100%; min-height:48px; border:2px solid #d9e1e4; border-radius:13px;
+      padding:11px 13px; color:var(--ink); background:var(--white);
+    }
+    .field input:focus { border-color:var(--orange); outline:3px solid rgba(232,71,42,.15); }
+    .field small { display:block; margin-top:6px; color:var(--muted); }
+    .checkout-submit {
+      width:100%; min-height:50px; border:0; border-radius:13px; background:var(--orange);
+      color:var(--white); font-weight:950; font-size:1rem;
+    }
+    .checkout-submit:disabled { opacity:.55; cursor:not-allowed; }
+
     @media (max-width:850px) {
       .menu-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
       .perks { grid-template-columns:1fr; }
@@ -165,7 +202,7 @@
 
   <header class="hero">
     <div class="hero-inner">
-      <img class="logo-badge" src="image-1.webp" width="140" height="140" alt="Jay's Food Hub logo">
+      <img class="logo-badge" src="assets/image-1.webp" width="140" height="140" alt="Jay's Food Hub logo">
       <div>
         <p class="eyebrow">Fresh • Crispy • Filling</p>
         <h1>JAY'S FOOD HUB</h1>
@@ -195,7 +232,7 @@
         
       <article class="card" data-name="plain fries + coleslaw">
         <div class="pic">
-          <img src="image-2.webp" alt="Plain Fries + Coleslaw" loading="lazy" decoding="async">
+          <img src="assets/image-2.webp" alt="Plain Fries + Coleslaw" loading="lazy" decoding="async">
         </div>
         <div class="card-body">
           <div class="card-title-row">
@@ -210,7 +247,7 @@
       </article>
       <article class="card" data-name="fries + sausage + coleslaw">
         <div class="pic">
-          <img src="image-3.webp" alt="Fries + Sausage + Coleslaw" loading="lazy" decoding="async">
+          <img src="assets/image-3.webp" alt="Fries + Sausage + Coleslaw" loading="lazy" decoding="async">
         </div>
         <div class="card-body">
           <div class="card-title-row">
@@ -225,7 +262,7 @@
       </article>
       <article class="card" data-name="loaded fries + 1 sausage">
         <div class="pic">
-          <img src="image-4.webp" alt="Loaded Fries + 1 Sausage" loading="lazy" decoding="async">
+          <img src="assets/image-4.webp" alt="Loaded Fries + 1 Sausage" loading="lazy" decoding="async">
         </div>
         <div class="card-body">
           <div class="card-title-row">
@@ -240,7 +277,7 @@
       </article>
       <article class="card" data-name="loaded fries + 2 sausages">
         <div class="pic">
-          <img src="image-5.webp" alt="Loaded Fries + 2 Sausages" loading="lazy" decoding="async">
+          <img src="assets/image-5.webp" alt="Loaded Fries + 2 Sausages" loading="lazy" decoding="async">
         </div>
         <div class="card-body">
           <div class="card-title-row">
@@ -255,7 +292,7 @@
       </article>
       <article class="card" data-name="loaded fries + 2 sausages + coleslaw">
         <div class="pic">
-          <img src="image-6.webp" alt="Loaded Fries + 2 Sausages + Coleslaw" loading="lazy" decoding="async">
+          <img src="assets/image-6.webp" alt="Loaded Fries + 2 Sausages + Coleslaw" loading="lazy" decoding="async">
         </div>
         <div class="card-body">
           <div class="card-title-row">
@@ -294,6 +331,38 @@
     <strong>JAY'S FOOD HUB</strong><br>
     Fresh food. Simple ordering.
   </footer>
+
+
+  <div class="checkout-overlay" id="checkout-overlay" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
+    <div class="checkout">
+      <div class="checkout-head">
+        <div>
+          <h2 id="checkout-title">Where should we deliver? 📍</h2>
+          <p style="margin:6px 0 0;color:var(--muted)">Add your hostel room number or exact delivery point.</p>
+        </div>
+        <button class="close-checkout" id="close-checkout" type="button" aria-label="Close checkout">×</button>
+      </div>
+
+      <div class="checkout-summary" id="checkout-summary"></div>
+
+      <form id="checkout-form">
+        <div class="field">
+          <label for="delivery-location">Delivery location <span aria-hidden="true">*</span></label>
+          <input id="delivery-location" name="delivery-location" type="text"
+                 placeholder="e.g. Hostel B, Room 14" autocomplete="street-address" required>
+          <small>For a hostel, include the hostel name/block and room number. Otherwise enter a clear landmark or delivery point.</small>
+        </div>
+
+        <div class="field">
+          <label for="customer-name">Your name <span aria-hidden="true">*</span></label>
+          <input id="customer-name" name="customer-name" type="text"
+                 placeholder="e.g. John" autocomplete="name" required>
+        </div>
+
+        <button class="checkout-submit" type="submit">Continue to WhatsApp →</button>
+      </form>
+    </div>
+  </div>
 
   <nav class="bottom" aria-label="Quick actions">
     <a href="#menu"><span aria-hidden="true">🍟</span><span>Menu</span></a>
@@ -339,6 +408,30 @@
         showToast(`${MENU[index][0]} added ✓`);
       }
 
+      const checkoutOverlay = document.getElementById("checkout-overlay");
+      const checkoutSummary = document.getElementById("checkout-summary");
+      const checkoutForm = document.getElementById("checkout-form");
+      const deliveryLocation = document.getElementById("delivery-location");
+      const customerName = document.getElementById("customer-name");
+
+      function getOrderDetails() {
+        const quantities = new Map();
+        cart.forEach(index => quantities.set(index, (quantities.get(index) || 0) + 1));
+
+        let total = 0;
+        const lines = [];
+        const summaryLines = [];
+
+        quantities.forEach((qty, index) => {
+          const price = Number(MENU[index][1].slice(1));
+          total += price * qty;
+          lines.push(`- ${MENU[index][0]} x${qty}`);
+          summaryLines.push(`<li>${MENU[index][0]} ×${qty}</li>`);
+        });
+
+        return { quantities, total, lines, summaryLines };
+      }
+
       function openOrder() {
         if (!cart.length) {
           showToast("Your order is empty. Choose something from the menu first.");
@@ -346,27 +439,55 @@
           return;
         }
 
-        const quantities = new Map();
-        cart.forEach(index => quantities.set(index, (quantities.get(index) || 0) + 1));
+        const { total, summaryLines } = getOrderDetails();
+        checkoutSummary.innerHTML =
+          `<strong>Your order</strong><ul>${summaryLines.join("")}</ul><div class="checkout-total">Total: K${total}</div>`;
 
-        let total = 0;
-        const lines = [];
-        quantities.forEach((qty, index) => {
-          const price = Number(MENU[index][1].slice(1));
-          total += price * qty;
-          lines.push(`- ${MENU[index][0]} x${qty}`);
-        });
+        checkoutOverlay.classList.add("open");
+        document.body.style.overflow = "hidden";
+        setTimeout(() => deliveryLocation.focus(), 50);
+      }
 
+      function closeOrder() {
+        checkoutOverlay.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      checkoutForm.addEventListener("submit", event => {
+        event.preventDefault();
+
+        const location = deliveryLocation.value.trim();
+        const name = customerName.value.trim();
+
+        if (!location || !name) {
+          checkoutForm.reportValidity();
+          return;
+        }
+
+        const { total, lines } = getOrderDetails();
         const message = [
           "Hello JAY'S FOOD HUB! I want to order:",
           ...lines,
           "",
-          `Total: K${total}`
-        ].join("\n");
+          `Total: K${total}`,
+          `Customer: ${name}`,
+          `Delivery location: ${location}`
+        ].join("\\n");
 
         const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;
         window.open(url, "_blank", "noopener,noreferrer");
-      }
+        closeOrder();
+      });
+
+      document.getElementById("close-checkout").addEventListener("click", closeOrder);
+
+      checkoutOverlay.addEventListener("click", event => {
+        if (event.target === checkoutOverlay) closeOrder();
+      });
+
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && checkoutOverlay.classList.contains("open")) closeOrder();
+      });
 
       function filterMenu(query) {
         const q = query.trim().toLowerCase();
